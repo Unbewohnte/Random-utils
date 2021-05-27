@@ -3,8 +3,8 @@
 
 # Usage
 ## There are 2 flags to specify - `-inline` and `-limit`
-`-inline` flag takes an integer. If not negative - each line in the output file will contain specified number of characters
-`-limit` flag takes an integer. If not negative - the output file will contain all Unicode characters up to specified one   
+`-inline` flag takes an integer. If not negative - each line in the output file will contain specified number of characters.
+`-limit` flag takes an integer. If not negative - the output file will contain all Unicode characters up to specified one.
 
 ## Examples
 
