@@ -11,7 +11,6 @@
 ### `-inline`
 1. `./UnicodeCharsGenerator -inline=20` - the generated output file will **try** to contain 20 characters in one line
 2. `./UnicodeCharsGenerator -inline=-1` - all characters will be put in one line
-3. `./UnicodeCharsGenerator` - as in 2., all characters will be put in one line  
 
 ### `-limit`
 1. `./UnicodeCharsGenerator -limit=20000` - the generated output file will contain all Unicode characters up to 20000 one
