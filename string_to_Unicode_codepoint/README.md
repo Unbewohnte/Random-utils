@@ -12,8 +12,8 @@ Compiled binary file will be in `./target/release/` directory
 ---
 
 # Usage
-`./string_to_Unicode_codepoint SOME_TEXT_OR_ᗜˬᗜ_ȿन頿⍅獅_FANCY_CHARS_HERE`
-`./string_to_Unicode_codepoint "SAME AS BEFORE, BUT NOW YOU CAN ADD SPACES !"`
+- `./string_to_Unicode_codepoint SOME_TEXT_OR_ᗜˬᗜ_ȿन頿⍅獅_FANCY_CHARS_HERE`
+- `./string_to_Unicode_codepoint "SAME AS BEFORE, BUT NOW YOU CAN ADD SPACES !"`
 
 ## Examples
 
