@@ -17,6 +17,8 @@ def sendImages(img_dir = ".", ID = 0, IS_GROUP_CHAT = False, TOKEN = ""):
 	vk = vk_api.VkApi(token = TOKEN).get_api()
 
 	files = os.listdir(img_dir)
+	files.sort()
+
 	counter = 1
 	for filename in files:
 
@@ -32,7 +34,7 @@ def sendImages(img_dir = ".", ID = 0, IS_GROUP_CHAT = False, TOKEN = ""):
 		upload_img = upload.photo_messages(photos = path_to_image)[0]
 
 		# each message will contain "Counter : {number_of_}"
-		MESSAGE = "Counter : ┃{}┃ The next appr. at ~ ┃{}┃".format(counter,
+		MESSAGE = "▶ Counter  ┃{}┃ The next appr. at ~ ┃{}┃ ◀".format(counter,
 		 datetime.datetime.now() + datetime.timedelta(seconds=4))
 		# sending
 		print("• {}: Sending {}...".format(counter,filename))
