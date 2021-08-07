@@ -4,13 +4,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"twitch-hooks/discordhooks"
 	"twitch-hooks/twitchhooks"
 	"twitch-hooks/vkhooks"
 )
 
-const configFilename string = "config.cfg"
+const DefaultConfigFilename string = "config.cfg"
 
 type keys struct {
 	Twitch  twitchhooks.Keys
@@ -30,22 +31,23 @@ type Config struct {
 	Messages   messages
 }
 
-// Checks if config file exists in the same directory
-func ConfigExists() bool {
-	_, err := os.Stat(configFilename)
+// Checks if config file exists
+func ConfigExists(configPath string) bool {
+	_, err := os.Stat(configPath)
 	if err != nil {
 		return false
 	}
 	return true
 }
 
-// Creates a new config file in current directory.
-func CreateConfig() error {
+// Creates a new config file in specified directory
+func CreateConfig(dir string) error {
 	// create a config file in the same directory
-	configF, err := os.Create(configFilename)
+	configF, err := os.Create(filepath.Join(dir, DefaultConfigFilename))
 	if err != nil {
 		return fmt.Errorf("could not create a config file: %s", err)
 	}
+	defer configF.Close()
 
 	// write default config fields
 	defaults, err := json.MarshalIndent(&Config{}, "", "    ")
@@ -63,9 +65,9 @@ func CreateConfig() error {
 // Opens and reads config file, returns `Config` struct.
 // If ReadConfig cannot unmarshal config file - it creates a new one with
 // all default fields
-func ReadConfig() (*Config, error) {
+func ReadConfig(pathToConfig string) (*Config, error) {
 	// get config`s contents
-	configContents, err := os.ReadFile(configFilename)
+	configContents, err := os.ReadFile(pathToConfig)
 	if err != nil {
 		return nil, fmt.Errorf("could not read config: %s", err)
 	}
@@ -73,7 +75,7 @@ func ReadConfig() (*Config, error) {
 	var config Config
 	err = json.Unmarshal(configContents, &config)
 	if err != nil {
-		_ = CreateConfig()
+		_ = CreateConfig(filepath.Dir(pathToConfig))
 		return nil, fmt.Errorf("could not unmarshal config: %s\nCreatead a new one", err)
 	}
 
